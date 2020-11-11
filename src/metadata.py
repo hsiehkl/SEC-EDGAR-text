@@ -35,6 +35,7 @@ class Metadata(object):
         self.document_group = ''
         self.section_name = ''
         self.section_n_characters = None
+        self.section_n_words = None
         self.endpoints = []
         self.extraction_method = ''
         self.warnings = []
@@ -154,6 +155,7 @@ class Metadata(object):
             document_group,
             section_name,
             section_n_characters,
+            section_n_words,
             section_end_time,
             extraction_method,
             output_file,
@@ -172,6 +174,7 @@ class Metadata(object):
                        self.sec_index_url, self.sec_url,
                        self.metadata_file_name, self.document_group,
                        self.section_name, str(self.section_n_characters),
+                       str(self.section_n_words),
                        str(self.section_end_time)[:-3],
                        self.extraction_method,
                        str(self.output_file),
@@ -206,6 +209,7 @@ def load_from_json(file_path):
             metadata.document_group = data['form_group']
             metadata.section_name = data['section_name']
             metadata.section_n_characters = data['section_n_characters']
+            metadata.section_n_words = data['section_n_words']
             metadata.endpoints = data['endpoints']
             metadata.extraction_method = data['extraction_method']
             metadata.warnings = data['warnings']

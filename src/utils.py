@@ -117,6 +117,7 @@ if args.write_sql:
             document_group text,
             section_name text,
             section_n_characters integer,
+            section_n_words integer,
             section_end_time datetime,
             extraction_method text,
             output_file text,
@@ -217,7 +218,7 @@ else:
 """Create search_terms_regex, which stores the patterns that we
 use for identifying sections in each of EDGAR documents types
 """
-with open (path.join(project_dir, 'document_group_section_search.json'), 'r') as \
+with open (path.join(project_dir, 'document_group_section_search_test.json'), 'r') as \
         f:
     json_text = f.read()
     search_terms = json.loads(json_text)

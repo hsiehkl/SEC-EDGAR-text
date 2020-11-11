@@ -1,0 +1,108 @@
+{
+    "10-K": [
+        {
+            "itemname": "Item1",
+            "txt": [
+                {
+                    "start": "\n\\s{,40}(?:PART.{,40})?Item_1.{,10}Business.{,39}?\n",
+                    "end": "\n\\s{,40}(?:PART.{,40})?ITEM_(?:1A|2).{,10}(?:Risk_Factors|Properties).{,39}?\n"
+                }
+            ],
+            "html": [
+                {
+                    "start": "\n_(?:PART.{,40})?Item_1.{,10}Business",
+                    "end": "\n_(?:PART.{,40})?Item_(?:1A|2).{,10}(?:Risk_Factors|Properties).{,99}?\n"
+                }
+            ]
+        },
+        {
+            "itemname": "Item1A",
+            "txt": [
+                {
+                    "start": "\n\\s{,40}(?:PART.{,40})?Item_1.{,10}Risk_Factors.{,39}?\n",
+                    "end": "\n\\s{,40}(?:PART.{,40})?ITEM_2.{,10}Properties.{,39}?\n"
+                },
+                {
+                    "start": "\n\\s{,40}(?:PART.{,40})?Item_1.{,10}Risk_Factors",
+                    "end": "\n\\s{,40}(?:PART.{,40})?ITEM_[2-9].{,39}?\n"
+                }
+            ],
+            "html": [
+                {
+                    "start": "\n_(?:PART.{,40})?Item_1.{,10}Risk_Factors",
+                    "end": "\n_(?:PART.{,40})?Item_2.{,10}Properties.{,99}?\n"
+                },
+                {
+                    "start": "\n_(?:PART.{,40})?Item_1.{,10}Risk_Factors",
+                    "end": "\n_(?:PART.{,40})?Item_[2-9].{,99}?\n"
+                },
+                {
+                    "start": "\n_(?:PART.{,40})?Item_1\\(?A",
+                    "end": "\n_(?:PART.{,40})?Item_[2-9].{,99}?\n"
+                }
+            ]
+        },
+        {
+            "itemname": "Item3",
+            "txt": [
+                { 
+                    "start": "\n\\s{,40}(?:PART.{,40})?Item_3.{,10}Legal_Proceedings.{,39}?\n",
+                    "end": "\n\\s{,40}(?:PART.{,40})?ITEM_4.{,10}Mine_Safety_Disclosures.{,39}?\n"
+                }
+            ],
+            "html": [
+                {
+                    "start": "\n_(?:PART.{,40})?Item_3.{,10}Legal_Proceedings",
+                    "end": "\n_(?:PART.{,40})?ITEM_4.{,10}Mine_Safety_Disclosures.{,99}?\n"
+                }
+            ]
+        },
+        {
+            "itemname": "Item7",
+            "txt": [
+                {
+                    "start": "\n\\s{,40}(?:PART.{,40})?(?:ITEM_7.{,40})?MANAGEMENT.{,5}DISCUSSION_AND.{,69}?\n",
+                    "end": "\n\\s{,40}(?:PART.{,40})?ITEM_(?:7A|8).{,99}?\n"
+                },
+                {
+                    "start": "\n\\s{,40}(?:PART.{,40})?(?:ITEM_7.{,40})?MANAGEMENT.{,5}DISCUSSION_AND.{,69}?\n",
+                    "end": "\n\\s{,40}(?:PART.{,40})?(?:INDEX_TO.{,20})?(?:QUANTITATIVE_AND_QUALITATIVE_DISCLOSURES|FINANCIAL_STATEMENTS|CONSOLIDATED_BALANCE|CONSOLIDATED_STATEMENTS).{,69}?\n"
+                }
+            ],
+            "html": [
+                {
+                    "start": "\n_(?:PART.{,40})?_Item_7",
+                    "end": "\n_(?:PART.{,40})?_Item_(?:7A|8).{,99}?\n"
+                },
+                {
+                    "start": "\n(?:PART.{,40})?MANAGEMENT.{,5}DISCUSSION_AND",
+                    "end": "\n(?:PART.{,40})?(?:INDEX_TO.{,20})?(?:QUANTITATIVE_AND_QUALITATIVE_DISCLOSURES|FINANCIAL_STATEMENTS|CONSOLIDATED_BALANCE|CONSOLIDATED_STATEMENTS?).{,99}?\n"
+                }
+            ]
+        },
+        {
+            "itemname": "Item7A",
+            "txt": [
+                {
+                    "start": "\n\\s{,40}(?:PART.{,40})?(?:ITEM_7A.{,40})?QUANTITATIVE_AND_QUALITATIVE_DISCLOSURES.{,69}?\n",
+                    "end": "\n\\s{,40}(?:PART.{,40})?ITEM_8.{,99}?\n"
+                },
+                {
+                    "start": "\n\\s{,40}(?:PART.{,40})?(?:ITEM_7A.{,40})?QUANTITATIVE_AND_QUALITATIVE_DISCLOSURES.{,69}?\n",
+                    "end": "\n\\s{,40}(?:PART.{,40})?(?:INDEX_TO.{,20})?(?:FINANCIAL_STATEMENTS|CONSOLIDATED_BALANCE|CONSOLIDATED_STATEMENTS).{,69}?\n"
+                }
+            ],
+            "html": [
+                {
+                    "start": "\n_(?:PART.{,40})?_Item_7A",
+                    "end": "\n_(?:PART.{,40})?_Item_8.{,99}?\n"
+                },
+                {
+                    "start": "\n(?:PART.{,40})?QUANTITATIVE_AND_QUALITATIVE_DISCLOSURES",
+                    "end": "\n(?:PART.{,40})?(?:INDEX_TO.{,20})?(?:FINANCIAL_STATEMENTS|CONSOLIDATED_BALANCE|CONSOLIDATED_STATEMENTS?).{,99}?\n"
+                }
+            ]
+        }
+
+    ]
+}

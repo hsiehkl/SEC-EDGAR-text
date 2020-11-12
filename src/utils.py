@@ -42,6 +42,7 @@ parser.add_argument('--start_company', help='index number of first company to do
 parser.add_argument('--end_company', help='index number of last company to download from the companies_list file')
 parser.add_argument('--traffic_limit_pause_ms', help='time to pause between download attempts, to avoid overloading EDGAR server')
 parser.add_argument('--multiprocessing_cores', help='number of processor cores to use')
+parser.add_argument('--remove_short_line', action='store_true', help='remove short singe line of text')
 args = parser.parse_args()
 
 if args.storage:
@@ -218,7 +219,7 @@ else:
 """Create search_terms_regex, which stores the patterns that we
 use for identifying sections in each of EDGAR documents types
 """
-with open (path.join(project_dir, 'document_group_section_search_test.json'), 'r') as \
+with open (path.join(project_dir, 'document_group_section_search_10k.json'), 'r') as \
         f:
     json_text = f.read()
     search_terms = json.loads(json_text)

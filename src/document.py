@@ -47,8 +47,8 @@ class Document(object):
                 section_search_terms_with_notes.append(section_search_terms)
             else:
                 max_n = self.get_note_n()
-                for i in range(2, max_n+1):
-                    new_section_search_terms = section_search_terms.copy()
+                for i in range(1, max_n+1):
+                    new_section_search_terms = copy.copy(section_search_terms) #section_search_terms.copy()
                     new_section_search_terms["itemname"] = f"Note{i}"
                     search_pairs = section_search_terms[self.search_terms_type()]
                     new_search_pairs = self.transfrom_note_search_pair(i, max_n, search_pairs)
@@ -80,7 +80,10 @@ class Document(object):
             metadata.time_elapsed = round(prep_time + time_elapsed, 1)
             metadata.section_end_time = str(datetime.utcnow())
             if text_extract:
-                # cleaned_text = self.remove_short_single_line(text_extract)
+                if args.remove_short_line:
+                    cleaned_text = self.remove_short_single_line(text_extract)
+                else:
+                    cleaned_text = text_extract
                 # success: save the excerpt file
                 metadata.section_n_characters = len(cleaned_text)
                 metadata.section_n_words = len(cleaned_text.split())
@@ -114,14 +117,13 @@ class Document(object):
     def transfrom_note_search_pair(self, i, max_n, search_pairs):
         pairs = []
         for pair in search_pairs:
-            new_pair = pair.copy()
+            new_pair = copy.copy(pair) #pair.copy()
             new_pair['start'] = pair['start'].replace('-', f'{i}')
             if i != max_n:
                 new_pair['end'] = pair['end'].replace('-', f'{i+1}')
             else:
                 new_pair['end'] = "\n\s(?:PART.{,40})?Item\s9.{,10}Changes\sin\sand\sDisagreements\sWith.{,99}?\n"
             pairs.append(new_pair)
-        print(f"Note {i}")
         print(new_pair)
         return pairs
 
@@ -142,15 +144,11 @@ class Document(object):
         return max_n
 
     def remove_short_single_line(self, text):
-        print("Start to clean text!!!!!!")
-        orignal_text = text.copy()
-        pattern = '(^|\n).{0,30}(?=\n|$)'
-        print(pattern)
-        cleaned_text = re.sub(pattern, '\n', orignal_text, re.DOTALL | re.IGNORECASE)
-        print("XXXX-1")
+        # [DATA_TABLE_REMOVED], Table of Contents, page number
+        orignal_text = copy.copy(text)
+        pattern = '(^|\n).{0,10}(?=\n|$)'
+        cleaned_text = re.sub(pattern, '\n', orignal_text)
         cleaned_text = re.sub(r'\n+', '\n\n', cleaned_text).strip()
-        print("XXXX-2")
-        print(cleaned_text)
         return cleaned_text
 
     def prepare_text(self):

@@ -104,6 +104,21 @@
             ]
         },
         {
+            "itemname": "Item8",
+            "txt": [
+                { 
+                    "start": "\n\\s{,40}(?:PART.{,40})?Item_3.{,10}Legal_Proceedings.{,39}?\n",
+                    "end": "\n\\s{,40}(?:PART.{,40})?ITEM_4.{,10}Mine_Safety_Disclosures.{,39}?\n"
+                }
+            ],
+            "html": [
+                { 
+                "start": "\n_(?:PART.{,40})?Item_8.{,10}Financial_Statements_and_Supplementary_Data",
+                "end": "\n_NOTE_1\\D.{,99}\n"
+                }
+            ]
+        },
+        {
             "itemname": "Notes",
             "txt": [
                 { 

@@ -102,7 +102,21 @@
                     "end": "\n(?:PART.{,40})?(?:INDEX_TO.{,20})?(?:FINANCIAL_STATEMENTS|CONSOLIDATED_BALANCE|CONSOLIDATED_STATEMENTS?).{,99}?\n"
                 }
             ]
+        },
+        {
+            "itemname": "Notes",
+            "txt": [
+                { 
+                    "start": "\n\\s{,40}(?:PART.{,40})?Item_3.{,10}Legal_Proceedings.{,39}?\n",
+                    "end": "\n\\s{,40}(?:PART.{,40})?ITEM_4.{,10}Mine_Safety_Disclosures.{,39}?\n"
+                }
+            ],
+            "html": [
+                {
+                "start": "\n_NOTE_-\\D.{,99}\n",
+                "end": "\n_NOTE_-\\D.{,99}\n"
+                }
+            ]
         }
-
     ]
 }

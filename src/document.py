@@ -124,7 +124,6 @@ class Document(object):
             else:
                 new_pair['end'] = "\n\s(?:PART.{,40})?Item\s9.{,10}Changes\sin\sand\sDisagreements\sWith.{,99}?\n"
             pairs.append(new_pair)
-        print(new_pair)
         return pairs
 
     def get_note_n(self):

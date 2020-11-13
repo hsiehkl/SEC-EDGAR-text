@@ -128,8 +128,8 @@
             ],
             "html": [
                 {
-                "start": "\n_NOTE_-\\D.{,99}\n",
-                "end": "\n_NOTE_-\\D.{,99}\n"
+                    "start": "\n_NOTE_-\\D.{,99}\n",
+                    "end": "\n_NOTE_-\\D.{,99}\n"
                 }
             ]
         }

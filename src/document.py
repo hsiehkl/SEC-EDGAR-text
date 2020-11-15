@@ -81,7 +81,8 @@ class Document(object):
             metadata.section_end_time = str(datetime.utcnow())
             if text_extract:
                 if args.remove_short_line:
-                    cleaned_text = self.remove_short_single_line(text_extract)
+                    cleaned_text, section_n_table_removed = self.remove_short_single_line(text_extract)
+                    metadata.section_n_table_removed = section_n_table_removed
                 else:
                     cleaned_text = text_extract
                 # success: save the excerpt file
@@ -143,12 +144,21 @@ class Document(object):
         return max_n
 
     def remove_short_single_line(self, text):
-        # [DATA_TABLE_REMOVED], Table of Contents, page number
+        
         orignal_text = copy.copy(text)
-        pattern = '(^|\n).{0,10}(?=\n|$)'
-        cleaned_text = re.sub(pattern, '\n', orignal_text)
-        cleaned_text = re.sub(r'\n+', '\n\n', cleaned_text).strip()
-        return cleaned_text
+
+        section_n_table_removed = self.count_table_number(orignal_text)
+
+        # remove page number, etc.
+        patterns = ['^\s*([0-9]+\s*)+$', '^\s*(\[DATA_TABLE_REMOVED\]+\s*)+$', '^\s*(Table of Contents+\s*)+$']
+        for pattern in patterns:
+            orignal_text = re.sub(pattern, '', orignal_text, flags=re.M)
+
+        orignal_text = re.sub(r'\n+', '\n\n', orignal_text).strip()
+        return orignal_text, section_n_table_removed
+
+    def count_table_number(self, text):
+        return len(re.findall('\[DATA_TABLE_REMOVED\]', text))
 
     def prepare_text(self):
         # handled in child classes

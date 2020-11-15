@@ -119,6 +119,7 @@ if args.write_sql:
             section_name text,
             section_n_characters integer,
             section_n_words integer,
+            section_n_table_removed integer,
             section_end_time datetime,
             extraction_method text,
             output_file text,

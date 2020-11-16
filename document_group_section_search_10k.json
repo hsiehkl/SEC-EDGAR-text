@@ -113,8 +113,12 @@
             ],
             "html": [
                 { 
-                "start": "\n_(?:PART.{,40})?Item_8.{,10}Financial_Statements_and_Supplementary_Data",
-                "end": "\n_NOTE_1\\D.{,99}\n"
+                    "start": "\n_(?:PART.{,40})?Item_8.{,10}Financial_Statements_and_Supplementary_Data",
+                    "end": "\n_NOTE_1\\D.{,99}\n"
+                },
+                { 
+                    "start": "\n_(?:PART.{,40})?Item_8.{,10}Financial_Statements_and_Supplementary_Data",
+                    "end": "\n_(?:PART.{,40})?ITEM_9.{,10}CHANGES_IN_AND_DISAGREEMENTS_WITH_ACCOUNTANTS_ON_ACCOUNTING_AND_FINANCIAL_DISCLOSURE.{,99}?\n"
                 }
             ]
         },

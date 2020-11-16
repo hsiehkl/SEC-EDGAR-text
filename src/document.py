@@ -68,7 +68,7 @@ class Document(object):
 
             search_pairs = section_search_terms_with_note[self.search_terms_type()]
             text_extract, extraction_summary, start_text, end_text, warnings = \
-                self.extract_section(search_pairs)
+                self.extract_section(search_pairs, section_name)
             time_elapsed = time.process_time() - start_time
             metadata.section_name = section_name
             if start_text:

@@ -128,7 +128,7 @@ class HtmlDocument(Document):
             self.plaintext = document_string
 
 
-    def extract_section(self, search_pairs):
+    def extract_section(self, search_pairs, item):
         """
 
         :param search_pairs:
@@ -138,35 +138,26 @@ class HtmlDocument(Document):
         end_text = 'na'
         warnings = []
         text_extract = None
-        for st_idx, st in enumerate(search_pairs):
-            # ungreedy search (note '.*?' regex expression between 'start' and 'end' patterns
-            # also using (?:abc|def) for a non-capturing group
-            # also an extra pair of parentheses around the whole expression,
-            # so that we always return just one object, not a tuple of groups
-            # st = super().search_terms_pattern_to_regex()
-            # st = Reader.search_terms_pattern_to_regex(st)
-            item_search = re.findall(st['start']+'.*?'+ st['end'],
-                                     self.plaintext,
-                                     re.DOTALL | re.IGNORECASE)
-            # item_search = re.findall('(' + st['start']+'.*?'+ st['end']+')',
-            #                          self.plaintext,
-            #                          re.DOTALL | re.IGNORECASE)
-            if item_search:
-                longest_text_length = 0
-                for s in item_search:
-                    if isinstance(s, tuple):
-                        # If incorrect use of multiple regex groups has caused
-                        # more than one match, then s is returned as a tuple
-                        self.log_cache.append(('ERROR',
-                                   "Groups found in Regex, please correct"))
-                    if len(s) > longest_text_length:
-                        text_extract = s.strip()
-                        longest_text_length = len(s)
-                # final_text_new = re.sub('^\n*', '', final_text_new)
-                final_text_lines = text_extract.split('\n')
-                start_text = final_text_lines[0]
-                end_text = final_text_lines[-1]
-                break
+
+        if item == "Item8":
+            text_extract, start_text, end_text = self.eatract_item_8(search_pairs)
+        else:
+            for st_idx, st in enumerate(search_pairs):
+                # ungreedy search (note '.*?' regex expression between 'start' and 'end' patterns
+                # also using (?:abc|def) for a non-capturing group
+                # also an extra pair of parentheses around the whole expression,
+                # so that we always return just one object, not a tuple of groups
+                # st = super().search_terms_pattern_to_regex()
+                # st = Reader.search_terms_pattern_to_regex(st)
+                item_search = re.findall(st['start']+'.*?'+ st['end'],
+                                        self.plaintext,
+                                        re.DOTALL | re.IGNORECASE)
+                # item_search = re.findall('(' + st['start']+'.*?'+ st['end']+')',
+                #                          self.plaintext,
+                #                          re.DOTALL | re.IGNORECASE)
+                if item_search:
+                    text_extract, start_text, end_text = self.get_extracted_text(item_search)
+                    break
         extraction_summary = self.extraction_method + '_document'
         if not text_extract:
             warnings.append('Extraction did not work for HTML file')
@@ -197,6 +188,48 @@ class HtmlDocument(Document):
             self.log_cache.append(('ERROR',
                                    "the should_remove_table function is broken"))
 
+
+    def eatract_item_8(self, search_pairs):
+
+        item_search_1 = re.findall(search_pairs[0]['start']+'.*?'+ search_pairs[0]['end'],
+                            self.plaintext,
+                            re.DOTALL | re.IGNORECASE)
+
+        item_search_2 = re.findall(search_pairs[1]['start']+'.*?'+ search_pairs[1]['end'],
+                    self.plaintext,
+                    re.DOTALL | re.IGNORECASE)
+        if item_search_1 and item_search_2:
+            text_extract_1, start_text_1, end_text_1 = self.get_extracted_text(item_search_1)
+            text_extract_2, start_text_2, end_text_2 = self.get_extracted_text(item_search_2)
+            if len(text_extract_1) > len(text_extract_2):
+                return text_extract_2, start_text_2, end_text_2
+            else:
+                return text_extract_1, start_text_1, end_text_1
+        elif item_search_1 and not item_search_2:
+            return self.get_extracted_text(item_search_1)
+        elif item_search_2 and not item_search_1:
+            return self.get_extracted_text(item_search_2)
+
+        print("Could not properly deal with item 8")
+
+
+    def get_extracted_text(self, item_search):
+        text_extracted = None
+        longest_text_length = 0
+        for s in item_search:
+            if isinstance(s, tuple):
+                # If incorrect use of multiple regex groups has caused
+                # more than one match, then s is returned as a tuple
+                self.log_cache.append(('ERROR',
+                            "Groups found in Regex, please correct"))
+            if len(s) > longest_text_length:
+                text_extracted = s.strip()
+                longest_text_length = len(s)
+        # final_text_new = re.sub('^\n*', '', final_text_new)
+        final_text_lines = text_extracted.split('\n')
+        start_text = final_text_lines[0]
+        end_text = final_text_lines[-1]
+        return text_extracted, start_text, end_text
 
 
 def is_line_break(e):

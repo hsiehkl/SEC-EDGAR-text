@@ -54,6 +54,10 @@
                 {
                     "start": "\n_(?:PART.{,40})?Item_3.{,10}Legal_Proceedings",
                     "end": "\n_(?:PART.{,40})?ITEM_4.{,10}Mine_Safety_Disclosures.{,99}?\n"
+                },
+                {
+                    "start": "\n_(?:PART.{,40})?Item_3.{,10}Legal_Proceedings",
+                    "end": "\n_(?:PART.{,40})?ITEM_4.{,10}Submission_of_Matters.{,99}?\n"
                 }
             ]
         },

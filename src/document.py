@@ -110,7 +110,8 @@ class Document(object):
                 except:
                     pass
                 metadata.metadata_file_name = failure_metadata_output_path
-                metadata.save_to_json(failure_metadata_output_path)
+                if not section_name.startswith('Note'):
+                    metadata.save_to_json(failure_metadata_output_path)
             if args.write_sql:
                 metadata.save_to_db()
         return(self.log_cache)
@@ -140,6 +141,9 @@ class Document(object):
                     max_n = n
             except Exception as e:
                 print(f"Failed to get note number with {note}. {e}")
+
+        if max_n > 50:
+            max_n = 0
 
         return max_n
 

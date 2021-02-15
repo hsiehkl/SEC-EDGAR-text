@@ -1,2 +1,22 @@
 # A list of some of the current largest US listed companies: SEC CIK code, followed by a ticker code (which is used for labelling the output files)
 66740 MMM
+4962 AXP
+12927 BA
+18230 CAT
+93410 CVX
+858877 CSCO
+21344 KO
+354950 HD
+51143 IBM
+50863 INTC
+200406 JNJ
+19617 JPM
+63908 MCD
+310158 MRK
+789019 MSFT
+80424 PG
+86312 TRV
+732712 VZ
+104169 WMT
+1744489 DIS
+# 1001039 DIS
